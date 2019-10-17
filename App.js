@@ -7,26 +7,28 @@
  */
 
 import React from 'react';
-import {
-    Button,
-} from 'react-native';
-import firebase from 'react-native-firebase';
-
+import {StyleSheet, View} from 'react-native';
+import AndroidNativeCrash from './AndroidNativeCrash';
+import ExceptionLog from './ExceptionLog';
+import Caught from './Caught';
 
 export default class App extends React.Component {
-
-    handleOnPress = () => {
-        firebase.crashlytics().log('Test crash');
-        firebase.crashlytics().recordError(37, 'Test Error');
-        firebase.crashlytics().crash();
-    };
-
     render() {
         return (
-            <Button
-                onPress={this.handleOnPress}
-                title="Crash"
-            />
+            <View style={styles.container}>
+                <Caught />
+                <ExceptionLog />
+                <AndroidNativeCrash />
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
